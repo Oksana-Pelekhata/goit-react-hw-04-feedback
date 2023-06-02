@@ -16,19 +16,16 @@ export const App = () => {
       const handleFeedbackBtn = (e) => {
         const {name} = e.target
         if (name === 'good') setGood(good + 1)
-        if (name === 'neutral') setNeutral(neutral + 1)
+        else if (name === 'neutral') setNeutral(neutral + 1)
         else if (name === 'bad') setBad(bad + 1)
     }
 
     const countTotalFeedback = () => {
-      
-     let totalFeedback = good + neutral + bad
-      return totalFeedback
+      return good + neutral + bad
     }
   
    const countPositiveFeedbackPercentage = () => {
-       const positiveFeedbackPercentage = Math.round(good / countTotalFeedback() * 100)
-return positiveFeedbackPercentage
+return Math.round(good / countTotalFeedback() * 100)
     }
   
  
@@ -36,7 +33,7 @@ return positiveFeedbackPercentage
       return (
     <ThemeProvider theme = {theme}>
   <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={handleFeedbackBtn} />.
+          <FeedbackOptions onLeaveFeedback={handleFeedbackBtn} options={["good", "neutral", "bad"]} />.
           </Section>
           {countTotalFeedback() === 0 ? <Notification message="There is no feedback" /> :
             <Section title="Statistics">
